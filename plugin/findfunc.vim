@@ -1,7 +1,7 @@
 " Vim plugin to return the name of the function that is currently being edited
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 " Version:      0.1
-" Last Change:  Sat 23 Oct 2010 06:29:02 PM CEST
+" Last Change:  Sat 23 Oct 2010 06:42:10 PM CEST
 
 if exists('g:loaded_findfunc')
     finish
@@ -61,7 +61,7 @@ function! s:DefaultSearch(search, name)
     let rgx = (a:search != '' ? a:search : def_search)
 
     let line_no = search(rgx, 'bnW')
-    j
+
     if line_no > 0
         let rgx = (a:name != '' ? a:name : def_name)
         return matchstr(getline(line_no), rgx)
