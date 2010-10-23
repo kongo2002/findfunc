@@ -1,7 +1,7 @@
 " Vim plugin to return the name of the function that is currently being edited
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 " Version:      0.1
-" Last Change:  Sat 23 Oct 2010 06:11:30 PM CEST
+" Last Change:  Sat 23 Oct 2010 06:29:02 PM CEST
 
 if exists('g:loaded_findfunc')
     finish
@@ -15,6 +15,19 @@ endif
 let s:save_cpo = &cpo
 set cpo&vim
 
+" define the filetype specific functions or
+" the parameters for the DefaultSearch here
+"
+" a custom function without arguments is defined like this:
+"   'filetype': { 'func': 's:FuncName' },
+"
+" a custom function with arguments is defined like this:
+"   'filetype': { 'func': 's:FuncName', 'args': [ 'foo', 'bar'] },
+"
+" the DefaultSearch can be triggered with filetype-specific arguments:
+"   search: regex to find the line containing the function name
+"   name:   regex to extract the function name (used with matchstr())
+"
 let s:FiletypeMap = {
     \ 'python': { 'func': 's:SearchPython' },
     \ 'vim': { 'args': ['^\s*func\%[tion]', ''] }
@@ -59,6 +72,7 @@ function! s:DefaultSearch(search, name)
     return ''
 endfunction
 
+" python specific search function
 function! s:SearchPython()
     let candidates = []
     call add(candidates, search('^\s*def\s\+.*:\s*$', 'bnW'))
