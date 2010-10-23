@@ -1,7 +1,7 @@
 " Vim plugin to return the name of the function that is currently being edited
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 " Version:      0.1
-" Last Change:  Sat 23 Oct 2010 06:55:53 PM CEST
+" Last Change:  Sat 23 Oct 2010 07:03:34 PM CEST
 
 if exists('g:loaded_findfunc')
     finish
@@ -34,11 +34,11 @@ let s:FiletypeMap = {
     \ 'vim': { 'args': ['^\s*func\%[tion]', ''] }
     \ }
 
-function! FindFunctionName(filetype)
+function! FindFunctionName()
     let func = 's:DefaultSearch'
     let args = ['', '']
-    if has_key(s:FiletypeMap, a:filetype)
-        let ft = s:FiletypeMap[a:filetype]
+    if has_key(s:FiletypeMap, &ft)
+        let ft = s:FiletypeMap[&ft]
         if has_key(ft, 'func')
             let func = ft['func']
             if has_key(ft, 'args')
@@ -84,7 +84,7 @@ function! s:SearchPython()
 endfunction
 
 " define default command
-com! FindFunction echo FindFunctionName(&ft)
+com! FindFunction echo FindFunctionName()
 
 " define <plug> mapping
 nnoremap <silent> <plug>FindFunc :FindFunction<CR>
