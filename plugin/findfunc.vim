@@ -82,7 +82,15 @@ function! s:SearchPython()
     return getline(max(candidates))
 endfunction
 
+" define default command
 com! FindFunction echo FindFunctionName(&ft)
+
+" define <plug> mapping
+nnoremap <silent> <plug>FindFunc :FindFunction<CR>
+
+if !hasmapto('<plug>FindFunc', 'n')
+    nmap <leader>fn <plug>FindFunc
+endif
 
 let &cpo = s:save_cpo
 unlet s:save_cpo
