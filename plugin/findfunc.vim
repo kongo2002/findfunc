@@ -1,7 +1,7 @@
 " Vim plugin to return the name of the function that is currently being edited
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 " Version:      0.1
-" Last Change:  Sun 24 Oct 2010 01:32:38 PM CEST
+" Last Change:  Sun 24 Oct 2010 01:35:44 PM CEST
 
 if exists('g:loaded_findfunc')
     finish
@@ -22,11 +22,10 @@ set cpo&vim
 "   'filetype': { 'func': 's:FuncName' },
 "
 " a custom function with arguments is defined like this:
-"   'filetype': { 'func': 's:FuncName', 'args': [ 'foo', 'bar'] },
+"   'filetype': { 'func': 's:FuncName', 'args': ['foo', 'bar'] },
 "
-" the DefaultSearch can be triggered with filetype-specific arguments:
-"   search: regex to find the line containing the function name
-"   name:   regex to extract the function name (used with matchstr())
+" the DefaultSearch with arguments like this:
+"   'filetype': { 'args': ['foo', 'bar'] },
 "
 let s:FiletypeMap = {
     \ 'automod': { 'args': ['^\s*begin.*\%(function\|procedure\)', '^\s*\S\+\s\+\zs.*'] },
@@ -58,6 +57,9 @@ function! FindFunctionName()
     return call(func, args)
 endfunction
 
+" the DefaultSearch can be triggered with filetype-specific arguments:
+"   search: regex to find the line containing the function name
+"   name:   regex to extract the function name (used with matchstr())
 function! s:DefaultSearch(search, name)
     let def_search = '^\w\+\s\+\w\+.*\n*\s*[(){:].*[,)]*\s*$'
     let def_name = '^[^(){}]*[[:blank:]:]\+\zs\w\+'
