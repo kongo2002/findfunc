@@ -1,7 +1,7 @@
 " Vim plugin to return the name of the function that is currently being edited
 " Maintainer:   Gregor Uhlenheuer <kongo2002@googlemail.com>
 " Version:      0.1
-" Last Change:  Sat 23 Oct 2010 08:01:59 PM CEST
+" Last Change:  Sun 24 Oct 2010 01:32:38 PM CEST
 
 if exists('g:loaded_findfunc')
     finish
@@ -31,6 +31,7 @@ set cpo&vim
 let s:FiletypeMap = {
     \ 'automod': { 'args': ['^\s*begin.*\%(function\|procedure\)', '^\s*\S\+\s\+\zs.*'] },
     \ 'cpp': { 'args': ['^\%(\w\+\s\+\)\=[[:alnum:]_:]\+.*\n*\s*[(){:].*[,)]*\s*$', ''] },
+    \ 'java': { 'args': ['^\s*\w\+\s*\w*\_s\+\w\+\s*[^=;]\+\ze\_s*{', ''] },
     \ 'python': { 'func': 's:SearchPython' },
     \ 'vim': { 'args': ['^\s*func\%[tion]', ''] }
     \ }
